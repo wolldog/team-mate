@@ -1,0 +1,27 @@
+{
+  "name": "team-mate",
+  "version": "1.0.0",
+  "description": "A command-line application that generates a polished HTML webpage to display your team's contact details.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wolldog/team-mate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wolldog/team-mate/issues"
+  },
+  "homepage": "https://github.com/wolldog/team-mate#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "jest": "^29.4.0"
+  }
+}
