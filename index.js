@@ -1,5 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer");
+const fs = require("fs")
 
 // TODO: Create a function to write HTML file
 function writeToFile(fileName, data) {}
