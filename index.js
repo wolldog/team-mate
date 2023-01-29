@@ -30,9 +30,61 @@ const employeeQuestions = (currentNewMember) => {
     ])
     .then((response) => {
         answers.push(response);
-        console.log(answers)
+        employeeSpecific (currentNewMember);
     });
 };
+
+function employeeSpecific (currentNewMember) {
+    switch (currentNewMember) {
+        case "team manager":
+            inquirer.prompt(managerQuestion).then((response) => {
+                answers.push(response);  
+            });
+            break;
+        case "engineer":
+            inquirer.prompt(engineerQuestion).then((response) => {
+                answers.push(response); 
+            });
+            break;
+        case "intern":
+            inquirer.prompt(internQuestion).then((response) => {
+                answers.push(response); 
+            });
+            break;
+        default:
+            console.log("Something went wrong")
+    };
+}
+
+const managerQuestion = [
+    {
+        type: 'input',
+        name: 'officeNumber',
+        message: "What is the team manager's office number?",
+        
+    }
+]
+
+const engineerQuestion = [
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is the engineer's GitHub username?",
+        
+    }
+]
+
+const internQuestion = [
+    {
+        type: 'input',
+        name: 'school',
+        message: "What school did the intern attend?",
+        
+    }
+]
+
+
+
 // TODO: Create a function to write HTML file
 function writeToFile(fileName, data) {}
 
