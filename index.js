@@ -38,17 +38,20 @@ function employeeSpecific (currentNewMember) {
     switch (currentNewMember) {
         case "team manager":
             inquirer.prompt(managerQuestion).then((response) => {
-                answers.push(response);  
+                answers.push(response);
+                nextTeamMember ();  
             });
             break;
         case "engineer":
             inquirer.prompt(engineerQuestion).then((response) => {
-                answers.push(response); 
+                answers.push(response);
+                nextTeamMember (); 
             });
             break;
         case "intern":
             inquirer.prompt(internQuestion).then((response) => {
-                answers.push(response); 
+                answers.push(response);
+                nextTeamMember (); 
             });
             break;
         default:
@@ -83,7 +86,33 @@ const internQuestion = [
     }
 ]
 
+const nextTeamMember = () => {
+    inquirer.prompt(choices).then((response) => {
+        console.log(response)
+        switch (response.nextEmployee) {
+            case "Engineer":
+                currentNewMember = "engineer"
+                employeeQuestions (currentNewMember)
+                break;
+            case "Intern":
+                currentNewMember = "intern"
+                employeeQuestions (currentNewMember)
+                break;        
+            default:
+                console.log(answers)
+                // buildTeam ();
+        }
+    });
+};
 
+const choices = [
+    {
+        type: 'list',
+        name: 'nextEmployee',
+        message: "Which type of team member would you like to add?",
+        choices: ["Engineer", "Intern", "I don't want to add any more team members."],
+    }
+];
 
 // TODO: Create a function to write HTML file
 function writeToFile(fileName, data) {}
