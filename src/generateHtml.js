@@ -1,26 +1,39 @@
-const generateCard = () => {
+// const Manager = require("../lib/manager");
+
+function generateCards (wholeTeamArr) {
+
     
-    `<div class="col">
-    <div class="card .h-100" style="width: 18rem;">
-        <div class="card-header bg-info">
-            <h5 class="card-title">${name}</h5>
-            <h6 class="card-subtitle bi ${role}">${role}</h6>
-        </div>
-        <ul class="list-group p-2">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item"><a href = "mailto: ${email}">${email}</a></li>
-            <li class="list-group-item">${roleSpecific}</li>
-        </ul>
-    </div>
-</div>`
+    return wholeTeamArr.map((member) => {
+        const name = member.getName()
+        const id = member.getId()
+        const email = member.getEmail()
+        const role = member.getRole()
+
+
+
+
+        return `<div class="col">
+            <div class="card .h-100" style="width: 18rem;">
+                <div class="card-header bg-info">
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle bi ${role.toLowerCase()}">${role}</h6>
+                </div>
+                <ul class="list-group p-2">
+                    <li class="list-group-item">${id}</li>
+                    <li class="list-group-item"><a href = "mailto: ${email}">${email}</a></li>
+                    <li class="list-group-item">Role specific</li>
+                </ul>
+            </div>
+        </div>`
+        }).join("");
 }
 
 
+function generateHTML (wholeTeamArr) {
 
+    return `
 
-const generateHTML = () => {
-
-    `<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -43,9 +56,7 @@ const generateHTML = () => {
             <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 m-auto g-4">
                     
-                    
-                    <!-- forEach loop function to generate cards -->
-
+                    ${generateCards(wholeTeamArr)}
                 
                 </div>
             </div>
@@ -54,5 +65,12 @@ const generateHTML = () => {
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
-    </html>`
+    </html>
+
+    `
+
 }
+
+
+
+module.exports = generateHTML
