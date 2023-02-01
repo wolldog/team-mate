@@ -1,0 +1,27 @@
+.body {
+    box-sizing: content-box;
+  }
+
+  .engineer::before{
+    display: inline-block;
+    content: "\F343";
+    padding: 0 10px 0 0;
+    color: white;
+       
+  }
+
+  .manager::before {
+    display: inline-block;
+    content: "\F7EA";
+    padding: 0 10px 0 0;
+    color: white;
+  }
+
+  .intern::before {
+    display: inline-block;
+    content: "\F6FD";
+    padding: 0 10px 0 0;
+    color: white;
+  }
+
+
