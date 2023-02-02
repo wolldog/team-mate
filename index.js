@@ -4,6 +4,7 @@ const fs = require("fs")
 const Manager = require("./lib/manager")
 const Engineer = require("./lib/engineer")
 const Intern = require("./lib/intern")
+const generateHTML = require("./src/generateHtml")
 
 
 
@@ -126,18 +127,26 @@ const buildTeam = () => {
         }
      });
   
-     console.log(teamArray)
+     
+     //assigns html template 'generateHTML' and data held in teamArray[] to variable 'htmlcontent'.
+     const htmlcontent = generateHTML(teamArray)
+     //calls writeToFile with file to be created and content
+     writeToFile('./dist/index.html', htmlcontent)
 };
 
-// TODO: Create a function to write HTML file
-function writeToFile(fileName, data) {}
+//Function writes data to html document
+const writeToFile = (fileName, data) => {
 
-// TODO: Create a function to initialize app
+    fs.writeFile(fileName, data, err =>
+        err ? console.log(err) : console.log('You have successfully created an index.html file! You will find it in the "dist" folder')
+)};
+
+//Function initializes application 
 function init() {
     let currentNewMember = "team manager";
     console.log("Please build your team")
     employeeQuestions (currentNewMember);
 }
 
-// Function call to initialize app
+// Call to function 'init'
 init();
