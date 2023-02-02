@@ -1,4 +1,4 @@
-// const Manager = require("../lib/manager");
+
 
 function generateCards (wholeTeamArr) {
 
@@ -9,25 +9,44 @@ function generateCards (wholeTeamArr) {
         const email = member.getEmail()
         const role = member.getRole()
 
-
-
-
         return `<div class="col">
             <div class="card .h-100" style="width: 18rem;">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">${name}</h5>
+                    <h5 class="card-title">Name: ${name}</h5>
                     <h6 class="card-subtitle bi ${role.toLowerCase()}">${role}</h6>
                 </div>
                 <ul class="list-group p-2">
-                    <li class="list-group-item">${id}</li>
-                    <li class="list-group-item"><a href = "mailto: ${email}">${email}</a></li>
-                    <li class="list-group-item">Role specific</li>
+                    <li class="list-group-item">ID: ${id}</li>
+                    <li class="list-group-item">Email: <a href = "mailto: ${email}">${email}</a></li>
+                    <li class="list-group-item">${roleSpecific(member)}</li>
                 </ul>
             </div>
         </div>`
         }).join("");
+
 }
 
+function roleSpecific (member) {
+
+    
+    let result = ""
+
+    switch (member.getRole()) {
+        case "Manager":
+            result = `Office number: ${member.getOfficeNumber()}`;
+            break;
+        case "Engineer":
+            result = `GitHub: <a href="https://github.com/${member.getGitHub()}">${member.getGitHub()}</a>`
+            break;
+        case "Intern":
+            result = `School: ${member.getSchool()}`
+            break;
+        default:
+            break
+    }
+
+    return result
+}
 
 function generateHTML (wholeTeamArr) {
 
