@@ -1,6 +1,10 @@
-// TODO: Include packages needed for this application
+// TODO: Include packages, classes and file locations required for this application
 const inquirer = require("inquirer");
 const fs = require("fs")
+
+
+
+//answers[] records the raw responses from each new member as they are added
 
 const answers = [];
 
@@ -26,69 +30,49 @@ const employeeQuestions = (currentNewMember) => {
                 message: `What is the ${currentNewMember}'s email?`,
                 
             },
+           
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: "What is the team manager's office number?",
+                when: () => currentNewMember === "team manager"
+            },
+        
+        
+        
+            {
+                type: 'input',
+                name: 'github',
+                message: "What is the engineer's GitHub username?",
+                when: () => currentNewMember === "engineer"
+            },
+        
+            {
+                type: 'input',
+                name: 'school',
+                message: "What school did the intern attend?",
+                when: () => currentNewMember === "intern"
+            }
+           
+
         
     ])
-    .then((response) => {
-        answers.push(response);
-        employeeSpecific (currentNewMember);
+        .then((response) => {
+            answers.push(response);
+            nextTeamMember()
     });
 };
 
-function employeeSpecific (currentNewMember) {
-    switch (currentNewMember) {
-        case "team manager":
-            inquirer.prompt(managerQuestion).then((response) => {
-                answers.push(response);
-                nextTeamMember ();  
-            });
-            break;
-        case "engineer":
-            inquirer.prompt(engineerQuestion).then((response) => {
-                answers.push(response);
-                nextTeamMember (); 
-            });
-            break;
-        case "intern":
-            inquirer.prompt(internQuestion).then((response) => {
-                answers.push(response);
-                nextTeamMember (); 
-            });
-            break;
-        default:
-            console.log("Something went wrong")
-    };
-}
 
-const managerQuestion = [
-    {
-        type: 'input',
-        name: 'officeNumber',
-        message: "What is the team manager's office number?",
-        
-    }
-]
 
-const engineerQuestion = [
-    {
-        type: 'input',
-        name: 'github',
-        message: "What is the engineer's GitHub username?",
-        
-    }
-]
-
-const internQuestion = [
-    {
-        type: 'input',
-        name: 'school',
-        message: "What school did the intern attend?",
-        
-    }
-]
+//nextTeamMember:
+//1. Prompts the user to select whether to:
+//a. add an engineer to the team, or
+//b. add an intern to the team, or
+//c. exit the process - if the user chooses the exit the process, buildTeam() is called.
 
 const nextTeamMember = () => {
     inquirer.prompt(choices).then((response) => {
-        console.log(response)
         switch (response.nextEmployee) {
             case "Engineer":
                 currentNewMember = "engineer"
@@ -99,11 +83,12 @@ const nextTeamMember = () => {
                 employeeQuestions (currentNewMember)
                 break;        
             default:
-                console.log(answers)
-                // buildTeam ();
+                buildTeam ();
         }
     });
 };
+
+//Choices list prompted by 'nextTeamMember'
 
 const choices = [
     {
