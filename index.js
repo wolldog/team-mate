@@ -1,14 +1,12 @@
-// TODO: Include packages, classes and file locations required for this application
+// Packages, classes and file locations required for this application
 const inquirer = require("inquirer");
-const fs = require("fs")
-const Manager = require("./lib/manager")
+const fs = require("fs");
+const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer")
 const Intern = require("./lib/intern")
 const generateHTML = require("./src/generateHtml")
 
-
-
-//answers[] records the raw responses from each new member as they are added
+//answersArray[] records the raw responses from each new member as they are added
 
 const answers = [];
 
@@ -16,68 +14,62 @@ const answers = [];
 
 const teamArray = [];
 
-const employeeQuestions = (currentNewMember) => {
+//employeeQuestions prompts the user for answers to the questions associated with the Employee Class, then
+//based on the value of variable 'currentNewEmployee' asks the role specific question
+//responses are then pushed to answers[] and nextTeamMember() is called.
 
+const employeeQuestions = (currentNewMember) => {
     inquirer 
         .prompt ([ 
             {
                 type: 'input',
                 name: 'name',
                 message: `What is the ${currentNewMember}'s name?`,
-                
             },
             {
                 type: 'input',
                 name: 'id',
                 message: `What is the ${currentNewMember}'s ID?`,
-                
             },
             {
                 type: 'input',
                 name: 'email',
                 message: `What is the ${currentNewMember}'s email?`,
-                
             },
-           
             {
                 type: 'input',
                 name: 'officeNumber',
                 message: "What is the team manager's office number?",
+                //Asks question when 'currentNewMember is equal to "team manager"
                 when: () => currentNewMember === "team manager"
             },
-        
-        
-        
             {
                 type: 'input',
                 name: 'github',
                 message: "What is the engineer's GitHub username?",
+                //Asks question when 'currentNewMember is equal to "engineer"
                 when: () => currentNewMember === "engineer"
             },
-        
             {
                 type: 'input',
                 name: 'school',
                 message: "What school did the intern attend?",
+                //Asks question when 'currentNewMember is equal to "intern"
                 when: () => currentNewMember === "intern"
             }
-           
-
-        
-    ])
+        ])
+    //Pushes respones to answers[] and calls nextTeamMember()
         .then((response) => {
             answers.push(response);
             nextTeamMember()
     });
 };
 
-
-
 //nextTeamMember:
 //1. Prompts the user to select whether to:
-//a. add an engineer to the team, or
-//b. add an intern to the team, or
-//c. exit the process - if the user chooses the exit the process, buildTeam() is called.
+//2. add an engineer to the team, or
+//3. add an intern to the team, or
+//4. exit the process - if the user chooses the exit the process, buildTeam() is called.
 
 const nextTeamMember = () => {
     inquirer.prompt(choices).then((response) => {
@@ -97,7 +89,6 @@ const nextTeamMember = () => {
 };
 
 //Choices list prompted by 'nextTeamMember'
-
 const choices = [
     {
         type: 'list',
@@ -126,17 +117,15 @@ const buildTeam = () => {
             console.log("Oops! something went wrong?")
         }
      });
-  
      
-     //assigns html template 'generateHTML' and data held in teamArray[] to variable 'htmlcontent'.
-     const htmlcontent = generateHTML(teamArray)
-     //calls writeToFile with file to be created and content
-     writeToFile('./dist/index.html', htmlcontent)
+//assigns html template 'generateHTML' and data held in teamArray[] to variable 'htmlcontent'.
+const htmlcontent = generateHTML(teamArray)
+//calls writeToFile with file to be created and content
+writeToFile('./dist/index.html', htmlcontent)
 };
 
 //Function writes data to html document
 const writeToFile = (fileName, data) => {
-
     fs.writeFile(fileName, data, err =>
         err ? console.log(err) : console.log('You have successfully created an index.html file! You will find it in the "dist" folder')
 )};
