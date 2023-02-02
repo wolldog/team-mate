@@ -12,8 +12,8 @@ function generateCards (wholeTeamArr) {
         return `<div class="col">
             <div class="card .h-100" style="width: 18rem;">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">Name: ${name}</h5>
-                    <h6 class="card-subtitle bi ${role.toLowerCase()}">${role}</h6>
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle bi ${role.toLowerCase()}"> ${role}</h6>
                 </div>
                 <ul class="list-group p-2">
                     <li class="list-group-item">ID: ${id}</li>
