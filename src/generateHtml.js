@@ -1,5 +1,7 @@
 
-
+//generates a card for each member of the team by looping over
+//the array of members
+//calls roleSpecific() to generate the 3rd list item.
 function generateCards (wholeTeamArr) {
 
     
@@ -12,8 +14,8 @@ function generateCards (wholeTeamArr) {
         return `<div class="col">
             <div class="card .h-100" style="width: 18rem;">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">${name}</h5>
-                    <h6 class="card-subtitle bi ${role.toLowerCase()}"> ${role}</h6>
+                    <h2 class="card-title">${name}</h2>
+                    <h3 class="card-subtitle bi ${role.toLowerCase()}"> ${role}</h3>
                 </div>
                 <ul class="list-group p-2">
                     <li class="list-group-item">ID: ${id}</li>
@@ -26,8 +28,8 @@ function generateCards (wholeTeamArr) {
 
 }
 
+//generates the role specific infomation
 function roleSpecific (member) {
-
     
     let result = ""
 
@@ -44,10 +46,11 @@ function roleSpecific (member) {
         default:
             break
     }
-
     return result
 }
 
+//generates the main body of the index.html file, title and card container
+//calls generateCards() to generate the team member cards
 function generateHTML (wholeTeamArr) {
 
     return `
@@ -89,7 +92,5 @@ function generateHTML (wholeTeamArr) {
     `
 
 }
-
-
-
+//exports function for use in the writeToFile function in index.js
 module.exports = generateHTML
