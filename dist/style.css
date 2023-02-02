@@ -8,6 +8,7 @@
     content: "\F343";
     padding: 0 10px 0 0;
     color: white;
+    font-size: x-large
        
   }
   /* adds the coffee cup icon before the engineer subtitle */
@@ -16,13 +17,20 @@
     content: "\F7EA";
     padding: 0 10px 0 0;
     color: white;
+    font-size: larger;
   }
+  
   /* adds the mortar board icon before the engineer subtitle */
   .intern::before {
     display: inline-block;
     content: "\F6FD";
     padding: 0 10px 0 0;
     color: white;
+    font-size: larger;
+  }
+
+  h3 {
+    font-size:large;
   }
 
 
