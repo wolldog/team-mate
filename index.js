@@ -1,12 +1,19 @@
 // TODO: Include packages, classes and file locations required for this application
 const inquirer = require("inquirer");
 const fs = require("fs")
+const Manager = require("./lib/manager")
+const Engineer = require("./lib/engineer")
+const Intern = require("./lib/intern")
 
 
 
 //answers[] records the raw responses from each new member as they are added
 
 const answers = [];
+
+//teamArray[] records each new member once their class has been assigned
+
+const teamArray = [];
 
 const employeeQuestions = (currentNewMember) => {
 
@@ -98,6 +105,29 @@ const choices = [
         choices: ["Engineer", "Intern", "I don't want to add any more team members."],
     }
 ];
+
+//buildTeam:
+//1. loops over the 'answers' array and allocates each member to the correct class based on which specific
+// question was answered.
+
+const buildTeam = () => {
+    answers.forEach((member) => {
+        if(member.officeNumber) {
+            const manager = new Manager(member.name, member.id, member.email, member.officeNumber);
+            teamArray.push(manager); 
+        } else if(member.github) {
+            const engineer = new Engineer(member.name, member.id, member.email, member.github);
+            teamArray.push(engineer);
+        } else if(member.school) {
+            const intern = new Intern(member.name, member.id, member.email, member.school);
+            teamArray.push(intern);
+        } else {
+            console.log("Oops! something went wrong?")
+        }
+     });
+  
+     console.log(teamArray)
+};
 
 // TODO: Create a function to write HTML file
 function writeToFile(fileName, data) {}
