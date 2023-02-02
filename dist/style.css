@@ -2,6 +2,7 @@
     box-sizing: content-box;
   }
 
+  /* adds the glasses icon before the engineer subtitle */
   .engineer::before{
     display: inline-block;
     content: "\F343";
@@ -9,14 +10,14 @@
     color: white;
        
   }
-
+  /* adds the coffee cup icon before the engineer subtitle */
   .manager::before {
     display: inline-block;
     content: "\F7EA";
     padding: 0 10px 0 0;
     color: white;
   }
-
+  /* adds the mortar board icon before the engineer subtitle */
   .intern::before {
     display: inline-block;
     content: "\F6FD";
