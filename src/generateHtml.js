@@ -19,7 +19,7 @@ function generateCards (wholeTeamArr) {
                 </div>
                 <ul class="list-group p-2">
                     <li class="list-group-item">ID: ${id}</li>
-                    <li class="list-group-item">Email: <a href = "mailto: ${email}">${email}</a></li>
+                    <li class="list-group-item">Email: <a href = "mailto:${email}">${email}</a></li>
                     <li class="list-group-item">${roleSpecific(member)}</li>
                 </ul>
             </div>
